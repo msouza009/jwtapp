@@ -22,7 +22,7 @@ public class UserDetailsImpl implements UserDetails {
         this.password = user.getPassword();
         this.authorities = List.of(user.getRole())
                 .stream()
-                .map(role -> (GrantedAuthority) role::name)
+                .map(role -> (GrantedAuthority) () -> "ROLE_" + role.name()) // Aqui o segredo!
                 .collect(Collectors.toList());
     }
 
